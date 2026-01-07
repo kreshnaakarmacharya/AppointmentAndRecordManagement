@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient details View</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:insert="Header.html"></th:block>
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white text-center">
+      <h4>View Patients</h4>
+    </div>
+    <div class="card-body">
+      <form action="/patient/patientEdit" method="post" th:object="${patient}">
+        <input type="hidden" th:field="*{id}" />
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label"> Full Name:</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{name}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Gender:</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{gender}" class="form-control" readonly>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Phone:</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{phone}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Date of Birth:</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{dob}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Marital Status:</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{maritalStatus}" class="form-control" readonly>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Present Address:</label>
+          <div class="col-sm-6">
+            <input type="text" th:field="*{presentAddress}" class="form-control" readonly>
+          </div>
+        </div>
+        <h4 class="mb-3">Doctor List</h4>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered align-middle text-center">
+            <thead class="table-dark">
+            <tr>
+              <th scope="col">S.N</th>
+              <th scope="col">Doctor Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="d, sn : ${doctors}">
+              <td th:text="${sn.count}"></td>
+              <td th:text="${d.name}"></td>
+            </tr>
+            <tr th:if="${doctors.size() == 0}">
+              <td colspan="2" class="text-muted fst-italic">No doctor found.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

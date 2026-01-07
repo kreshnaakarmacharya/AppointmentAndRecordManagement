@@ -1,0 +1,49 @@
+CREATE table specialization_table(
+    id BIGINT AUTO_INCREMENT,
+    code BIGINT,
+    name varchar(100),
+    note text,
+    primary key(id)
+);
+
+CREATE TABLE Doctor_tbl (
+    id BIGINT AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    specialization VARCHAR(100),
+    address VARCHAR(150),
+    phone VARCHAR(20),
+    gender VARCHAR(10),
+    note TEXT,
+    PRIMARY KEY(id)
+);
+// Add foreign table
+ALTER TABLE Doctor_tbl
+    ADD COLUMN specialization_id BIGINT;
+
+  //add foregin key constraints
+  ALTER TABLE Doctor_tbl
+      ADD CONSTRAINT fk_specialization
+          FOREIGN KEY (specialization_id)
+              REFERENCES Specialization_table(id)
+              ON DELETE SET NULL
+              ON UPDATE CASCADE;
+
+//admin table
+Create table Admin_tbl(
+    id bigint Auto_Increment PRIMARY KEY ,
+    fullname VARCHAR(100),
+    username VARCHAR(100),
+    email Varchar(100),
+    password varchar(100)
+);
+
+//create doctor patient relation
+CREATE TABLE doctor_patient_relation(
+    id BIGINT AUTO_INCREMENT,
+    doctor_id BIGINT NOT NULL,
+    patient_id BIGINT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(doctor_id) REFERENCES doctor_tbl(id),
+    FOREIGN KEY(patient_id) REFERENCES patient_tbl(id)
+);

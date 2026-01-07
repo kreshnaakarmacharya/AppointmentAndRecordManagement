@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:insert="PatientHeader.html"></th:block>
+<div class="container mt-3">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Doctor Name</th>
+            <th>status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="viewStatus:${viewAppointmentStatus}">
+            <td>[[${viewStatus.bookAppointment.date}]]</td>
+            <td>[[${viewStatus.bookAppointment.time}]]</td>
+            <td>[[${viewStatus.doctor.name}]]</td>
+            <td>[[${viewStatus.bookAppointment.status}]]</td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
